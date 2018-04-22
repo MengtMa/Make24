@@ -33,16 +33,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var slideMenuConstraint: NSLayoutConstraint!
     var isSlideMenuHidden = true
     
-    var num1 = 0
-    var num2 = 0
-    var num3 = 0
-    var num4 = 0
+    let N:Double = 24
+    var num1: Double = 0
+    var num2: Double = 0
+    var num3: Double = 0
+    var num4: Double = 0
     var expression = ""
     var result = ""
     var currentOperation:Operation = .Null
     var timer = Timer()
     var secCount = 0
-    var haveSolution = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,15 +76,21 @@ class ViewController: UIViewController {
     }
 
     func generateRandomNumber() {
-         num1 = Int(arc4random_uniform(9) + 1)
-         num2 = Int(arc4random_uniform(9) + 1)
-         num3 = Int(arc4random_uniform(9) + 1)
-         num4 = Int(arc4random_uniform(9) + 1)
+        while true {
+            num1 = Double(arc4random_uniform(9) + 1)
+            num2 = Double(arc4random_uniform(9) + 1)
+            num3 = Double(arc4random_uniform(9) + 1)
+            num4 = Double(arc4random_uniform(9) + 1)
+            
+            if getSolution(a: num1, b: num2, c: num3, d: num4).isEmpty == false {
+                break
+            }
+        }
         
-        btnNum1.setTitle("\(num1)", for: .normal)
-        btnNum2.setTitle("\(num2)", for: .normal)
-        btnNum3.setTitle("\(num3)", for: .normal)
-        btnNum4.setTitle("\(num4)", for: .normal)
+        btnNum1.setTitle("\(Int(num1))", for: .normal)
+        btnNum2.setTitle("\(Int(num2))", for: .normal)
+        btnNum3.setTitle("\(Int(num3))", for: .normal)
+        btnNum4.setTitle("\(Int(num4))", for: .normal)
     }
     func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
@@ -100,21 +106,21 @@ class ViewController: UIViewController {
             timeLable.text = "\(min):\(sec)"
         }
     }
-    
+
     @IBAction func numberPressed(_ sender: RoundButton) {
         let numChose = sender.tag
         switch numChose {
         case 1:
-            expression += "\(num1)"
+            expression += "\(Int(num1))"
             btnNum1.isEnabled = false
         case 2:
-            expression += "\(num2)"
+            expression += "\(Int(num2))"
             btnNum2.isEnabled = false
         case 3:
-            expression += "\(num3)"
+            expression += "\(Int(num3))"
             btnNum3.isEnabled = false
         case 4:
-            expression += "\(num4)"
+            expression += "\(Int(num4))"
             btnNum4.isEnabled = false
         default:
             expression += ""
@@ -156,7 +162,7 @@ class ViewController: UIViewController {
         if expression.isEmpty == false{
             let lastChar = expression.last!
             if lastChar >= "1" && lastChar <= "9" {
-                let deletedDigit = Int(String(lastChar))
+                let deletedDigit = Double(String(lastChar))
                 if btnNum1.isEnabled == false && deletedDigit == num1{
                     btnNum1.isEnabled = true
                 }else if btnNum2.isEnabled == false && deletedDigit == num2 {
@@ -209,8 +215,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showbtnPressed(_ sender: UIButton) {
-        if haveSolution {
-            createAlert(message: "equation")
+        let result = getSolution(a: num1, b: num2, c: num3, d: num4)
+        if result.isEmpty == false {
+            createAlert(message: result)
         } else {
             createAlert(message: "Sorry, there are actually no solutions")
         }
@@ -222,8 +229,82 @@ class ViewController: UIViewController {
             alert.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)
-
     }
+    
+    func getSolution(a: Double, b: Double, c: Double, d: Double) -> String {
+        var n: [Double] = [a, b, c, d]
+        var o: [Character] = ["+", "-", "*", "/"]
+        for w in 0...3 {
+            for x in 0...3{
+                if x == w {
+                    continue
+                }
+                for y in 0...3 {
+                    if y == x || y == w {
+                        continue
+                    }
+                    for z in 0...3 {
+                        if z == w || z == x || z == y {
+                            continue
+                        }
+                        for i in 0...3 {
+                            for j in 0...3 {
+                                for k in 0...3 {
+                                    let result = eval(a: n[w], b: n[x], c: n[y], d: n[z], x: o[i], y: o[j], z: o[k])
+                                    if result.isEmpty == false{
+                                        return result
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return ""
+    }
+    
+    func eval(a: Double, b: Double, c: Double, d: Double, x: Character, y: Character, z: Character) -> String {
+        if bingo(x: eval(num1: eval(num1: eval(num1: a, operater: x, num2: b), operater: y, num2: c), operater: z, num2: d)){
+            return "( ( \(Int(a)) \(x) \(Int(b)) ) \(y) \(Int(c)) ) \(z) \(Int(d))"
+        }
+        if bingo(x: eval(num1: eval(num1: a, operater: x, num2: eval(num1: b, operater: y, num2: c)), operater: z, num2: d)) {
+            return "( \(Int(a)) \(x) ( \(Int(b)) \(y) \(Int(c)) ) ) \(z) \(Int(d))"
+        }
+        if bingo(x: eval(num1: a, operater: x, num2: eval(num1: eval(num1: b, operater: y, num2: c), operater: z, num2: d))) {
+            
+            return "\(Int(a)) \(x) ( ( \(Int(b)) \(y) \(Int(c)) ) \(z) \(Int(d)) )"
+        }
+        if bingo(x: eval(num1: a, operater: x, num2: eval(num1: b, operater: y, num2: eval(num1: c, operater: z, num2: d)))) {
+            return "\(Int(a)) \(x) ( \(Int(b)) \(y) ( \(Int(c)) \(z) \(Int(d)) ) )"
+        }
+        if bingo(x: eval(num1: eval(num1: a, operater: x, num2: b), operater: y, num2: eval(num1: c, operater: z, num2: d))) {
+            return "( ( \(Int(a)) \(x) \(Int(b)) ) \(y) ( \(Int(c)) \(z) \(Int(d)) ) )"
+        }
+        
+        return ""
+    }
+    
+    func bingo(x: Double) -> Bool {
+
+        return abs(x - N) < 0.0000001
+    }
+    
+    func eval(num1: Double, operater: Character, num2: Double) -> Double {
+        switch operater {
+        case "+":
+            return num1 + num2
+        case "-":
+            return num1 - num2
+        case "*":
+            return num1 * num2
+        default:
+            return num1 / num2
+        }
+    }
+    
+    
     
     
 }
