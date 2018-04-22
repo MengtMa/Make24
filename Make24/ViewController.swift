@@ -29,6 +29,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var succeedLabel: UILabel!
     @IBOutlet weak var skipLabel: UILabel!
     
+    @IBOutlet weak var slideMenuConstraint: NSLayoutConstraint!
+    var isSlideMenuHidden = true
+    
     var num1 = "0"
     var num2 = "0"
     var num3 = "0"
@@ -51,11 +54,12 @@ class ViewController: UIViewController {
         outputLabel.layer.borderColor = UIColor.black.cgColor
         //first generate random number
         
-        btnNum1.setTitle(num1, for: .normal)
-        btnNum2.setTitle(num2, for: .normal)
-        btnNum3.setTitle(num3, for: .normal)
-        btnNum4.setTitle(num4, for: .normal)
+        generateRandomNumber()
+        
+
         // Do any additional setup after loading the view, typically from a nib.
+        
+        slideMenuConstraint.constant = -160
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,6 +67,22 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func generateRandomNumber() {
+         let randomNum1 = arc4random_uniform(9) + 1
+         let randomNum2 = arc4random_uniform(9) + 1
+         let randomNum3 = arc4random_uniform(9) + 1
+         let randomNum4 = arc4random_uniform(9) + 1
+        
+        num1 = "\(randomNum1)"
+        num2 = "\(randomNum2)"
+        num3 = "\(randomNum3)"
+        num4 = "\(randomNum4)"
+        
+        btnNum1.setTitle(num1, for: .normal)
+        btnNum2.setTitle(num2, for: .normal)
+        btnNum3.setTitle(num3, for: .normal)
+        btnNum4.setTitle(num4, for: .normal)
+    }
     @IBAction func numberPressed(_ sender: RoundButton) {
         let numChose = sender.tag
         switch numChose {
@@ -116,9 +136,40 @@ class ViewController: UIViewController {
     }
     @IBAction func delPressed(_ sender: RoundButton) {
         
+        
     }
     
     @IBAction func donePressed(_ sender: RoundButton) {
+    }
+    
+    @IBAction func MenuBtnPressed(_ sender: UIBarButtonItem) {
+        if isSlideMenuHidden {
+            slideMenuConstraint.constant = 0
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }else {
+            slideMenuConstraint.constant = -160
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+        isSlideMenuHidden = !isSlideMenuHidden
+        
+    }
+    
+    @IBAction func clearBtnPressed(_ sender: UIBarButtonItem) {
+        expression = ""
+        outputLabel.text = expression
+        btnNum1.isEnabled = true
+        btnNum2.isEnabled = true
+        btnNum3.isEnabled = true
+        btnNum4.isEnabled = true
+    }
+    
+    
+    @IBAction func skipBtnPressed(_ sender: UIBarButtonItem) {
+        generateRandomNumber()
     }
     
     

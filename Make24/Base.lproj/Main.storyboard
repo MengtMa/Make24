@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VWD-J9-aEA">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -341,17 +342,62 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UP3-oR-0Lj">
+                                <rect key="frame" x="0.0" y="88" width="160" height="724"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWz-QJ-zJi">
+                                        <rect key="frame" x="8" y="15" width="144" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="pbF-lB-9z8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
+                                        <state key="normal" title="Show Me"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="YWz-QJ-zJi" firstAttribute="leading" secondItem="UP3-oR-0Lj" secondAttribute="leading" constant="8" id="0cg-r5-v4o"/>
+                                    <constraint firstAttribute="width" constant="160" id="OlY-S4-OqO"/>
+                                    <constraint firstAttribute="trailing" secondItem="YWz-QJ-zJi" secondAttribute="trailing" constant="8" id="bDT-GQ-6J5"/>
+                                    <constraint firstItem="YWz-QJ-zJi" firstAttribute="top" secondItem="UP3-oR-0Lj" secondAttribute="top" constant="15" id="lZI-0v-X3P"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="UP3-oR-0Lj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0nG-7p-tNy"/>
                             <constraint firstItem="cAc-gc-Z5j" firstAttribute="width" secondItem="Xnn-t6-XRT" secondAttribute="width" id="4vd-7Q-5Bf"/>
                             <constraint firstItem="Xnn-t6-XRT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AmB-rb-epR"/>
+                            <constraint firstItem="UP3-oR-0Lj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="BbU-2V-1mN"/>
                             <constraint firstItem="cAc-gc-Z5j" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K97-Yp-LJ4"/>
+                            <constraint firstAttribute="bottom" secondItem="UP3-oR-0Lj" secondAttribute="bottom" id="PyU-4M-rAU"/>
                             <constraint firstAttribute="bottom" secondItem="Xnn-t6-XRT" secondAttribute="bottom" constant="80" id="b1A-x6-Qkx"/>
                             <constraint firstItem="Xnn-t6-XRT" firstAttribute="top" secondItem="cAc-gc-Z5j" secondAttribute="bottom" constant="70" id="qB8-U0-uxA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="hjD-iT-seB">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="menu-hamburger" id="wUI-0k-fdw">
+                            <color key="tintColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="MenuBtnPressed:" destination="BYZ-38-t0r" id="MxC-L8-7WT"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="fastForward" id="fhS-zh-3eX">
+                                <color key="tintColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="skipBtnPressed:" destination="BYZ-38-t0r" id="11v-Es-8Um"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="stop" id="lo8-Zi-PhW">
+                                <color key="tintColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="clearBtnPressed:" destination="BYZ-38-t0r" id="daF-6V-pAH"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="attemptLabel" destination="Exf-yS-MTZ" id="qbg-I3-d5n"/>
                         <outlet property="btnNum1" destination="ZbX-55-a8J" id="gdE-DP-ZQL"/>
@@ -360,12 +406,34 @@
                         <outlet property="btnNum4" destination="drK-fU-X4Y" id="vcP-L6-Z0G"/>
                         <outlet property="outputLabel" destination="cAc-gc-Z5j" id="5Yc-ag-JP6"/>
                         <outlet property="skipLabel" destination="5oo-QO-3HR" id="ah7-ea-Iux"/>
+                        <outlet property="slideMenuConstraint" destination="0nG-7p-tNy" id="s1c-Qb-vKb"/>
                         <outlet property="succeedLabel" destination="PIa-tN-b6Q" id="NqE-25-BGP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1060" y="118.96551724137932"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="c5S-Bq-82h">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VWD-J9-aEA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="13P-NB-b9f">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="WRm-j3-bs2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="og3-1z-Xlz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="117.59999999999999" y="118.96551724137932"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="menu-hamburger" width="64" height="64"/>
+    </resources>
 </document>
