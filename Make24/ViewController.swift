@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var attemptLabel: UILabel!
     
+    @IBOutlet weak var timeLable: UILabel!
     @IBOutlet weak var succeedLabel: UILabel!
     @IBOutlet weak var skipLabel: UILabel!
     
@@ -39,6 +40,9 @@ class ViewController: UIViewController {
     var expression = ""
     var result = ""
     var currentOperation:Operation = .Null
+    var timer = Timer()
+    var secCount = 0
+    var haveSolution = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,11 +54,15 @@ class ViewController: UIViewController {
         skipLabel.layer.borderWidth = 0.5
         skipLabel.layer.borderColor = UIColor.black.cgColor
         
+        timeLable.layer.borderWidth = 0.5
+        timeLable.layer.borderColor = UIColor.black.cgColor
+        
         outputLabel.layer.borderWidth = 0.5
         outputLabel.layer.borderColor = UIColor.black.cgColor
         //first generate random number
         
         generateRandomNumber()
+        startTimer()
         
 
         // Do any additional setup after loading the view, typically from a nib.
@@ -78,6 +86,21 @@ class ViewController: UIViewController {
         btnNum3.setTitle("\(num3)", for: .normal)
         btnNum4.setTitle("\(num4)", for: .normal)
     }
+    func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateCounter() {
+        secCount += 1
+        let min = Int(secCount/60)
+        let sec = secCount - min*60
+        if sec < 10 {
+            timeLable.text = "\(min):0\(sec)"
+        }else{
+            timeLable.text = "\(min):\(sec)"
+        }
+    }
+    
     @IBAction func numberPressed(_ sender: RoundButton) {
         let numChose = sender.tag
         switch numChose {
@@ -182,6 +205,24 @@ class ViewController: UIViewController {
     
     @IBAction func skipBtnPressed(_ sender: UIBarButtonItem) {
         generateRandomNumber()
+        secCount = 0
+    }
+    
+    @IBAction func showbtnPressed(_ sender: UIButton) {
+        if haveSolution {
+            createAlert(message: "equation")
+        } else {
+            createAlert(message: "Sorry, there are actually no solutions")
+        }
+    }
+    
+    func createAlert(message: String) {
+        let alert = UIAlertController(title: "Solution", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+
     }
     
     
