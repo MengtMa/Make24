@@ -7,13 +7,38 @@
 //
 
 import UIKit
+import TTGSnackbar
 
-enum Operation:String {
-    case Add = "+"
-    case Subtract = "-"
-    case Multiply = "*"
-    case Divide = "/"
-    case Null = "Null"
+var num1: Double = 0
+var num2: Double = 0
+var num3: Double = 0
+var num4: Double = 0
+var attemptTimes = 1
+var succeedTimes = 0
+var skipTimes = 0
+
+public struct Stack<T> {
+    fileprivate var array = [T]()
+    
+    public var isEmpty: Bool {
+        return array.isEmpty
+    }
+    
+    public var count: Int {
+        return array.count
+    }
+    
+    public mutating func push(_ element: T) {
+        array.append(element)
+    }
+    
+    public mutating func pop() -> T? {
+        return array.popLast()
+    }
+    
+    public var top: T? {
+        return array.last
+    }
 }
 
 class ViewController: UIViewController {
@@ -24,6 +49,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnNum3: RoundButton!
     @IBOutlet weak var btnNum4: RoundButton!
     
+    @IBOutlet weak var btnDone: RoundButton!
     @IBOutlet weak var attemptLabel: UILabel!
     
     @IBOutlet weak var timeLable: UILabel!
@@ -34,25 +60,29 @@ class ViewController: UIViewController {
     var isSlideMenuHidden = true
     
     let N:Double = 24
-    var num1: Double = 0
-    var num2: Double = 0
-    var num3: Double = 0
-    var num4: Double = 0
+
     var expression = ""
     var result = ""
-    var currentOperation:Operation = .Null
     var timer = Timer()
     var secCount = 0
     
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         attemptLabel.layer.borderWidth = 0.5
         attemptLabel.layer.borderColor = UIColor.black.cgColor
+        attemptLabel.text = String(attemptTimes)
+        
         succeedLabel.layer.borderWidth = 0.5
         succeedLabel.layer.borderColor = UIColor.black.cgColor
+        succeedLabel.text = String(succeedTimes)
         
         skipLabel.layer.borderWidth = 0.5
         skipLabel.layer.borderColor = UIColor.black.cgColor
+        skipLabel.text = String(skipTimes)
         
         timeLable.layer.borderWidth = 0.5
         timeLable.layer.borderColor = UIColor.black.cgColor
@@ -60,8 +90,10 @@ class ViewController: UIViewController {
         outputLabel.layer.borderWidth = 0.5
         outputLabel.layer.borderColor = UIColor.black.cgColor
         //first generate random number
-        
-        generateRandomNumber()
+        if num1 == 0 && num2 == 0 && num3 == 0 && num4 == 0 {
+            generateRandomNumber()
+        }
+        assignNumber()
         startTimer()
         
 
@@ -87,11 +119,25 @@ class ViewController: UIViewController {
             }
         }
         
+    }
+    
+    func assignNumber() {
+        btnNum1.isEnabled = true
+        btnNum2.isEnabled = true
+        btnNum3.isEnabled = true
+        btnNum4.isEnabled = true
+        btnDone.isEnabled = false
+        
         btnNum1.setTitle("\(Int(num1))", for: .normal)
         btnNum2.setTitle("\(Int(num2))", for: .normal)
         btnNum3.setTitle("\(Int(num3))", for: .normal)
         btnNum4.setTitle("\(Int(num4))", for: .normal)
+        
+        expression = ""
+        outputLabel.text = expression
+        secCount = 0
     }
+    
     func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
     }
@@ -108,6 +154,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func numberPressed(_ sender: RoundButton) {
+        btnDone.isEnabled = true
         let numChose = sender.tag
         switch numChose {
         case 1:
@@ -160,6 +207,9 @@ class ViewController: UIViewController {
     }
     @IBAction func delPressed(_ sender: RoundButton) {
         if expression.isEmpty == false{
+            if expression.count == 1 {
+                btnDone.isEnabled = false
+            }
             let lastChar = expression.last!
             if lastChar >= "1" && lastChar <= "9" {
                 let deletedDigit = Double(String(lastChar))
@@ -181,7 +231,127 @@ class ViewController: UIViewController {
     }
     
     @IBAction func donePressed(_ sender: RoundButton) {
+        
+        attemptTimes += 1
+        attemptLabel.text = String(attemptTimes)
+        
+        let isRight = calculateResult()
+        if isRight == true {
+            createAlert(title: "Succeed!", message: "Bingo! \(expression) = 24", action: "Next Puzzle")
+            succeedTimes += 1
+            succeedLabel.text = String(succeedTimes)
+            attemptTimes = 1
+            attemptLabel.text = String(attemptTimes)
+        }else {
+            let snackbar = TTGSnackbar(message: "Incorrect. Please try again!", duration: .middle)
+            snackbar.show()
+        }
     }
+    
+    func calculateResult() -> Bool {
+        let postExpression = convertToPostFix(input: expression)
+        let result = calculate(input: postExpression)
+        return bingo(x: result)
+    }
+    
+    func calculate(input: String) -> Double {
+        var stack = Stack<Double>()
+        var d1:Double = 0
+        var d2:Double = 0
+        var d3:Double = 0
+        for i in 0..<input.count {
+            let ch = Array(input)[i]
+            if ch >= "0" && ch <= "9" {
+                stack.push(Double(String(ch))!)
+            }
+            else {
+                if stack.isEmpty == false {
+                    d2 = stack.pop()!
+                }
+                if stack.isEmpty == false {
+                    d1 = stack.pop()!
+                }
+                switch ch {
+                    case "+":
+                        d3 = d1 + d2
+                    case "-":
+                        d3 = d1 - d2
+                    case "×":
+                        d3 = d1 * d2
+                    default:
+                        d3 = d1 / d2
+                }
+                stack.push(d3)
+            }
+        }
+        return stack.pop()!
+    }
+    
+    
+    func convertToPostFix(input: String) -> String {
+        var stringBuilder = ""
+        var operatorStack = Stack<Character>()
+        let length = input.count
+        for i in 0..<length {
+            let ch = Array(input)[i]
+            print("ch: \(ch)")
+            if ch >= "0" && ch <= "9" {
+                stringBuilder += String(ch)
+            }
+            //left bracket
+            if ch == "(" {
+                operatorStack.push(ch)
+            }
+            //operator
+            if isOperator(op: ch) {
+                if operatorStack.isEmpty == true {
+                    operatorStack.push(ch)
+                }
+                else {
+                    var stackTop = operatorStack.top
+                    if priority(ch: ch) > priority(ch: stackTop!) {
+                        operatorStack.push(ch)
+                    }
+                    else {
+                        stackTop = operatorStack.pop()
+                        stringBuilder += String(stackTop!)
+                        operatorStack.push(ch)
+                    }
+                    
+                }
+            }
+            
+            //right bracket
+            if ch == ")" {
+                var top = operatorStack.pop()
+                while top != "(" {
+                    stringBuilder += String(top!)
+                    top = operatorStack.pop()
+                }
+            }
+            
+        }
+        while operatorStack.isEmpty == false {
+            stringBuilder += String(operatorStack.pop()!)
+        }
+        //print(stringBuilder)
+        return stringBuilder
+    }
+    
+    func priority(ch: Character) -> Int {
+        if ch == "+" || ch == "-" {
+            return 1
+        }
+        if ch == "×" || ch == "÷" {
+            return 2
+        }
+        return 0
+    }
+    
+    func isOperator(op: Character) -> Bool {
+        return (op == "+") || (op == "-") || (op == "×") || (op == "÷")
+    }
+    
     
     @IBAction func MenuBtnPressed(_ sender: UIBarButtonItem) {
         if isSlideMenuHidden {
@@ -206,27 +376,46 @@ class ViewController: UIViewController {
         btnNum2.isEnabled = true
         btnNum3.isEnabled = true
         btnNum4.isEnabled = true
+        btnDone.isEnabled = false
     }
     
     
     @IBAction func skipBtnPressed(_ sender: UIBarButtonItem) {
+        attemptTimes = 1
+        attemptLabel.text = String(attemptTimes)
+        skipTimes += 1
+        skipLabel.text = String(skipTimes)
         generateRandomNumber()
-        secCount = 0
+        assignNumber()
     }
     
     @IBAction func showbtnPressed(_ sender: UIButton) {
         let result = getSolution(a: num1, b: num2, c: num3, d: num4)
         if result.isEmpty == false {
-            createAlert(message: result)
+            createAlert(title: "Solution", message: result, action: "OK")
         } else {
-            createAlert(message: "Sorry, there are actually no solutions")
+            createAlert(title: "Solution", message: "Sorry, there are actually no solutions!", action: "OK")
         }
+        slideMenuConstraint.constant = -160
+        isSlideMenuHidden = !isSlideMenuHidden
+        attemptTimes = 1
+        attemptLabel.text = String(attemptTimes)
+        skipTimes += 1
+        skipLabel.text = String(skipTimes)
     }
     
-    func createAlert(message: String) {
-        let alert = UIAlertController(title: "Solution", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+    @IBAction func pickNumPressed(_ sender: UIButton) {
+        slideMenuConstraint.constant = -160
+        isSlideMenuHidden = !isSlideMenuHidden
+    }
+    
+    
+    func createAlert(title: String, message: String, action: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: action, style: UIAlertActionStyle.default, handler: { (action) in
             alert.dismiss(animated: true, completion: nil)
+            self.generateRandomNumber()
+            self.assignNumber()
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -308,4 +497,6 @@ class ViewController: UIViewController {
     
     
 }
+
+
 

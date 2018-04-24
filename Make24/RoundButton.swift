@@ -23,5 +23,4 @@ class RoundButton: UIButton {
             layer.cornerRadius = frame.height / 2
         }
     }
-
 }

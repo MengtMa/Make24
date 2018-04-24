@@ -8,15 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		E9E6BA2E2081CEC70056700B /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6BA2D2081CEC70056700B /* RoundButton.swift */; };
+		E9E6BA52208D466A0056700B /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6BA51208D466A0056700B /* PickerViewController.swift */; };
 		E9EA6C2720812A940014FF79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EA6C2620812A940014FF79 /* AppDelegate.swift */; };
 		E9EA6C2920812A940014FF79 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EA6C2820812A940014FF79 /* ViewController.swift */; };
 		E9EA6C2C20812A940014FF79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9EA6C2A20812A940014FF79 /* Main.storyboard */; };
 		E9EA6C2E20812A960014FF79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9EA6C2D20812A960014FF79 /* Assets.xcassets */; };
 		E9EA6C3120812A960014FF79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9EA6C2F20812A960014FF79 /* LaunchScreen.storyboard */; };
+		EEB442F3F4C0133DF1F3FE03 /* Pods_Make24.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E48149DD7F4E2BF488D14CF3 /* Pods_Make24.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1618908259A7EFF06C118E1A /* Pods-Make24.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Make24.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Make24/Pods-Make24.debug.xcconfig"; sourceTree = "<group>"; };
+		DF3DC28838A4184641311956 /* Pods-Make24.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Make24.release.xcconfig"; path = "Pods/Target Support Files/Pods-Make24/Pods-Make24.release.xcconfig"; sourceTree = "<group>"; };
+		E48149DD7F4E2BF488D14CF3 /* Pods_Make24.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Make24.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9E6BA2D2081CEC70056700B /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		E9E6BA51208D466A0056700B /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		E9EA6C2320812A940014FF79 /* Make24.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Make24.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9EA6C2620812A940014FF79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9EA6C2820812A940014FF79 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,17 +37,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEB442F3F4C0133DF1F3FE03 /* Pods_Make24.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9CD05B64A92DAE190B2FFCC8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1618908259A7EFF06C118E1A /* Pods-Make24.debug.xcconfig */,
+				DF3DC28838A4184641311956 /* Pods-Make24.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A1DBAB173B29BFB2CD44FB49 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E48149DD7F4E2BF488D14CF3 /* Pods_Make24.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E9EA6C1A20812A940014FF79 = {
 			isa = PBXGroup;
 			children = (
 				E9EA6C2520812A940014FF79 /* Make24 */,
 				E9EA6C2420812A940014FF79 /* Products */,
+				9CD05B64A92DAE190B2FFCC8 /* Pods */,
+				A1DBAB173B29BFB2CD44FB49 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +84,7 @@
 			children = (
 				E9EA6C2620812A940014FF79 /* AppDelegate.swift */,
 				E9EA6C2820812A940014FF79 /* ViewController.swift */,
+				E9E6BA51208D466A0056700B /* PickerViewController.swift */,
 				E9EA6C2A20812A940014FF79 /* Main.storyboard */,
 				E9EA6C2D20812A960014FF79 /* Assets.xcassets */,
 				E9EA6C2F20812A960014FF79 /* LaunchScreen.storyboard */,
@@ -74,9 +101,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E9EA6C3520812A960014FF79 /* Build configuration list for PBXNativeTarget "Make24" */;
 			buildPhases = (
+				85F50F19107B8A23F6EB3C35 /* [CP] Check Pods Manifest.lock */,
 				E9EA6C1F20812A940014FF79 /* Sources */,
 				E9EA6C2020812A940014FF79 /* Frameworks */,
 				E9EA6C2120812A940014FF79 /* Resources */,
+				52F1BF58B8715EABA01C61EA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,6 +162,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		52F1BF58B8715EABA01C61EA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Make24/Pods-Make24-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGSnackbar.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Make24/Pods-Make24-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85F50F19107B8A23F6EB3C35 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Make24-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E9EA6C1F20812A940014FF79 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -140,6 +208,7 @@
 			files = (
 				E9E6BA2E2081CEC70056700B /* RoundButton.swift in Sources */,
 				E9EA6C2920812A940014FF79 /* ViewController.swift in Sources */,
+				E9E6BA52208D466A0056700B /* PickerViewController.swift in Sources */,
 				E9EA6C2720812A940014FF79 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,15 +351,13 @@
 		};
 		E9EA6C3620812A960014FF79 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1618908259A7EFF06C118E1A /* Pods-Make24.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Make24/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Lab3.Make24;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -300,15 +367,13 @@
 		};
 		E9EA6C3720812A960014FF79 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF3DC28838A4184641311956 /* Pods-Make24.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Make24/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Lab3.Make24;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

@@ -295,6 +295,9 @@
                                                 <state key="normal" title="DONE">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
@@ -343,17 +346,29 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UP3-oR-0Lj">
-                                <rect key="frame" x="-160" y="88" width="160" height="724"/>
+                                <rect key="frame" x="0.0" y="44" width="160" height="768"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWz-QJ-zJi">
                                         <rect key="frame" x="8" y="15" width="144" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="pbF-lB-9z8"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="21"/>
                                         <state key="normal" title="Show Me"/>
                                         <connections>
                                             <action selector="showbtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pFh-Bl-qMl"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44U-IW-PQq">
+                                        <rect key="frame" x="0.0" y="60" width="160" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="mQ7-ih-pLL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="21"/>
+                                        <state key="normal" title="Assign Number"/>
+                                        <connections>
+                                            <action selector="pickNumPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rVs-ex-q44"/>
+                                            <segue destination="EES-0w-KBu" kind="show" id="9sz-9I-0Ju"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -361,6 +376,9 @@
                                 <constraints>
                                     <constraint firstItem="YWz-QJ-zJi" firstAttribute="leading" secondItem="UP3-oR-0Lj" secondAttribute="leading" constant="8" id="0cg-r5-v4o"/>
                                     <constraint firstAttribute="width" constant="160" id="OlY-S4-OqO"/>
+                                    <constraint firstItem="44U-IW-PQq" firstAttribute="leading" secondItem="UP3-oR-0Lj" secondAttribute="leading" id="TPX-bH-zzD"/>
+                                    <constraint firstAttribute="trailing" secondItem="44U-IW-PQq" secondAttribute="trailing" id="Tji-6N-aU8"/>
+                                    <constraint firstItem="44U-IW-PQq" firstAttribute="top" secondItem="YWz-QJ-zJi" secondAttribute="bottom" constant="15" id="XhO-mb-mll"/>
                                     <constraint firstAttribute="trailing" secondItem="YWz-QJ-zJi" secondAttribute="trailing" constant="8" id="bDT-GQ-6J5"/>
                                     <constraint firstItem="YWz-QJ-zJi" firstAttribute="top" secondItem="UP3-oR-0Lj" secondAttribute="top" constant="15" id="lZI-0v-X3P"/>
                                 </constraints>
@@ -375,7 +393,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="UP3-oR-0Lj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-160" id="0nG-7p-tNy"/>
+                            <constraint firstItem="UP3-oR-0Lj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0nG-7p-tNy"/>
                             <constraint firstItem="cAc-gc-Z5j" firstAttribute="width" secondItem="Xnn-t6-XRT" secondAttribute="width" id="4vd-7Q-5Bf"/>
                             <constraint firstItem="Xnn-t6-XRT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AmB-rb-epR"/>
                             <constraint firstItem="UP3-oR-0Lj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="BbU-2V-1mN"/>
@@ -410,6 +428,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="attemptLabel" destination="Exf-yS-MTZ" id="qbg-I3-d5n"/>
+                        <outlet property="btnDone" destination="4R9-Ub-Hir" id="kve-e3-4VG"/>
                         <outlet property="btnNum1" destination="ZbX-55-a8J" id="gdE-DP-ZQL"/>
                         <outlet property="btnNum2" destination="2Rb-Fh-MkK" id="w3A-ub-A5j"/>
                         <outlet property="btnNum3" destination="fu0-0F-7dM" id="aZS-3v-Sit"/>
@@ -424,6 +443,149 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1060" y="118.96551724137932"/>
+        </scene>
+        <!--Picker View Controller-->
+        <scene sceneID="rbR-SB-7sx">
+            <objects>
+                <viewController id="EES-0w-KBu" customClass="PickerViewController" customModule="Make24" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yLN-NE-edF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ji1-vU-iLi">
+                                <rect key="frame" x="37.666666666666657" y="144" width="300" height="210"/>
+                                <subviews>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGb-O8-aMp">
+                                        <rect key="frame" x="0.0" y="10" width="45" height="190"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="PSA-VU-SI5"/>
+                                            <constraint firstAttribute="height" constant="190" id="cas-UY-FgU"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dataSource" destination="EES-0w-KBu" id="VWm-WL-tdf"/>
+                                            <outlet property="delegate" destination="EES-0w-KBu" id="ENm-9U-d9I"/>
+                                        </connections>
+                                    </pickerView>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbe-5X-oTn">
+                                        <rect key="frame" x="85" y="10" width="45" height="190"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="190" id="JHh-BK-6b7"/>
+                                            <constraint firstAttribute="width" constant="45" id="tLk-hL-OBb"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dataSource" destination="EES-0w-KBu" id="eaZ-lM-rxt"/>
+                                            <outlet property="delegate" destination="EES-0w-KBu" id="MKr-fW-z81"/>
+                                        </connections>
+                                    </pickerView>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05l-jt-NeF">
+                                        <rect key="frame" x="170" y="10" width="45" height="190"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="HFj-SJ-x3q"/>
+                                            <constraint firstAttribute="height" constant="190" id="gRn-dj-v15"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dataSource" destination="EES-0w-KBu" id="CQ8-Wb-Smh"/>
+                                            <outlet property="delegate" destination="EES-0w-KBu" id="ib7-O7-6SY"/>
+                                        </connections>
+                                    </pickerView>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UKK-3d-uiW">
+                                        <rect key="frame" x="255" y="10" width="45" height="190"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="3rF-qc-VPe"/>
+                                            <constraint firstAttribute="height" constant="190" id="D9i-RS-om6"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dataSource" destination="EES-0w-KBu" id="WFZ-3F-S1R"/>
+                                            <outlet property="delegate" destination="EES-0w-KBu" id="rsd-7b-4jJ"/>
+                                        </connections>
+                                    </pickerView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="210" id="DCf-kh-7st"/>
+                                    <constraint firstAttribute="width" constant="300" id="bFj-Yu-OL3"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="WZr-60-sHG">
+                                <rect key="frame" x="57.666666666666657" y="404" width="260" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edZ-Iy-d94" customClass="RoundButton" customModule="Make24" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <color key="backgroundColor" red="0.8275210261" green="0.83108341689999998" blue="0.847061336" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="UTb-Zb-ITT"/>
+                                            <constraint firstAttribute="height" constant="80" id="YDz-5g-aA9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="cancePressed:" destination="EES-0w-KBu" eventType="touchUpInside" id="P9V-7g-Sne"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XEr-K2-gPY" customClass="RoundButton" customModule="Make24" customModuleProvider="target">
+                                        <rect key="frame" x="180" y="0.0" width="80" height="80"/>
+                                        <color key="backgroundColor" red="0.8275210261" green="0.83108341689999998" blue="0.847061336" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="FaO-XF-bgh"/>
+                                            <constraint firstAttribute="width" constant="80" id="w2V-X6-3Z6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="Submit">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="submitPressed:" destination="EES-0w-KBu" eventType="touchUpInside" id="m8B-Bv-SIl"/>
+                                            <segue destination="BYZ-38-t0r" kind="show" identifier="segue" id="Bln-dc-lig"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="260" id="Iqt-cI-Hsn"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Your Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaA-Wg-mQY">
+                                <rect key="frame" x="63.666666666666657" y="118" width="246.99999999999997" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="ctR-W4-rsC"/>
+                                    <constraint firstAttribute="width" constant="247" id="qdK-dx-L8X"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="WZr-60-sHG" firstAttribute="centerX" secondItem="yLN-NE-edF" secondAttribute="centerX" id="2hz-ud-vE4"/>
+                            <constraint firstItem="Ji1-vU-iLi" firstAttribute="top" secondItem="MaA-Wg-mQY" secondAttribute="bottom" constant="5" id="4O9-IF-lLN"/>
+                            <constraint firstItem="MaA-Wg-mQY" firstAttribute="centerX" secondItem="yLN-NE-edF" secondAttribute="centerX" id="DXn-43-Up8"/>
+                            <constraint firstItem="Ji1-vU-iLi" firstAttribute="leading" secondItem="Y5R-DY-KfE" secondAttribute="leading" constant="37" id="Is8-gs-1TH"/>
+                            <constraint firstItem="Y5R-DY-KfE" firstAttribute="trailing" secondItem="Ji1-vU-iLi" secondAttribute="trailing" constant="37" id="LXz-bO-crx"/>
+                            <constraint firstItem="Ji1-vU-iLi" firstAttribute="centerX" secondItem="yLN-NE-edF" secondAttribute="centerX" id="Qb6-rV-QSF"/>
+                            <constraint firstItem="WZr-60-sHG" firstAttribute="leading" secondItem="Y5R-DY-KfE" secondAttribute="leading" constant="57.670000000000002" id="hEx-Uc-qfs"/>
+                            <constraint firstItem="Y5R-DY-KfE" firstAttribute="trailing" secondItem="WZr-60-sHG" secondAttribute="trailing" constant="57.329999999999998" id="kI7-vY-vnv"/>
+                            <constraint firstItem="WZr-60-sHG" firstAttribute="top" secondItem="Ji1-vU-iLi" secondAttribute="bottom" constant="50" id="rfH-oG-tNk"/>
+                            <constraint firstItem="Ji1-vU-iLi" firstAttribute="top" secondItem="Y5R-DY-KfE" secondAttribute="top" constant="100" id="uRf-cF-AYq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Y5R-DY-KfE"/>
+                    </view>
+                    <connections>
+                        <outlet property="numPicker1" destination="BGb-O8-aMp" id="bvg-m1-ptc"/>
+                        <outlet property="numPicker2" destination="nbe-5X-oTn" id="3lB-M0-hNr"/>
+                        <outlet property="numPicker3" destination="05l-jt-NeF" id="1ie-pp-xS9"/>
+                        <outlet property="numPicker4" destination="UKK-3d-uiW" id="bbo-FX-Njc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ddh-Hj-L1m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2376.8000000000002" y="118.96551724137932"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="c5S-Bq-82h">
@@ -447,4 +609,8 @@
     <resources>
         <image name="menu-hamburger" width="64" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="9sz-9I-0Ju"/>
+        <segue reference="Bln-dc-lig"/>
+    </inferredMetricsTieBreakers>
 </document>

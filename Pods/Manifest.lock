@@ -1,0 +1,16 @@
+PODS:
+  - TTGSnackbar (1.7.3)
+
+DEPENDENCIES:
+  - TTGSnackbar
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - TTGSnackbar
+
+SPEC CHECKSUMS:
+  TTGSnackbar: a66e929fd17d662152ec0964990a86e966310edb
+
+PODFILE CHECKSUM: 4ce8ee068cb62e833ff4453dee630e19033cddcd
+
+COCOAPODS: 1.5.0
