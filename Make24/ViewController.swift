@@ -353,21 +353,21 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func MenuBtnPressed(_ sender: UIBarButtonItem) {
-        if isSlideMenuHidden {
-            slideMenuConstraint.constant = 0
-            UIView.animate(withDuration: 0.3, animations: {
-                self.view.layoutIfNeeded()
-            })
-        }else {
-            slideMenuConstraint.constant = -160
-            UIView.animate(withDuration: 0.3, animations: {
-                self.view.layoutIfNeeded()
-            })
-        }
-        isSlideMenuHidden = !isSlideMenuHidden
-        
-    }
+//    @IBAction func MenuBtnPressed(_ sender: UIBarButtonItem) {
+//        if isSlideMenuHidden {
+//            slideMenuConstraint.constant = 0
+//            UIView.animate(withDuration: 0.3, animations: {
+//                self.view.layoutIfNeeded()
+//            })
+//        }else {
+//            slideMenuConstraint.constant = -160
+//            UIView.animate(withDuration: 0.3, animations: {
+//                self.view.layoutIfNeeded()
+//            })
+//        }
+//        isSlideMenuHidden = !isSlideMenuHidden
+//        
+//    }
     
     @IBAction func clearBtnPressed(_ sender: UIBarButtonItem) {
         expression = ""
@@ -389,7 +389,7 @@ class ViewController: UIViewController {
         assignNumber()
     }
     
-    @IBAction func showbtnPressed(_ sender: UIButton) {
+    @IBAction func showbtnPressed(_ sender: UIBarButtonItem) {
         let result = getSolution(a: num1, b: num2, c: num3, d: num4)
         if result.isEmpty == false {
             createAlert(title: "Solution", message: result, action: "OK")
