@@ -87,7 +87,7 @@ class ViewController: UIViewController {
         timeLable.layer.borderWidth = 0.5
         timeLable.layer.borderColor = UIColor.black.cgColor
         
-        outputLabel.layer.borderWidth = 0.5
+        outputLabel.layer.borderWidth = 1.0
         outputLabel.layer.borderColor = UIColor.black.cgColor
         //first generate random number
         if num1 == 0 && num2 == 0 && num3 == 0 && num4 == 0 {
@@ -236,7 +236,7 @@ class ViewController: UIViewController {
         attemptLabel.text = String(attemptTimes)
         
         let isRight = calculateResult()
-        if isRight == true {
+        if isRight == true && btnNum1.isEnabled == false && btnNum2.isEnabled == false && btnNum3.isEnabled == false && btnNum4.isEnabled == false {
             createAlert(title: "Succeed!", message: "Bingo! \(expression) = 24", action: "Next Puzzle")
             succeedTimes += 1
             succeedLabel.text = String(succeedTimes)
