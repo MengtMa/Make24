@@ -396,18 +396,18 @@ class ViewController: UIViewController {
         } else {
             createAlert(title: "Solution", message: "Sorry, there are actually no solutions!", action: "OK")
         }
-        slideMenuConstraint.constant = -160
-        isSlideMenuHidden = !isSlideMenuHidden
+//        slideMenuConstraint.constant = -160
+//        isSlideMenuHidden = !isSlideMenuHidden
         attemptTimes = 1
         attemptLabel.text = String(attemptTimes)
         skipTimes += 1
         skipLabel.text = String(skipTimes)
     }
     
-    @IBAction func pickNumPressed(_ sender: UIButton) {
-        slideMenuConstraint.constant = -160
-        isSlideMenuHidden = !isSlideMenuHidden
-    }
+//    @IBAction func pickNumPressed(_ sender: UIButton) {
+//        slideMenuConstraint.constant = -160
+//        isSlideMenuHidden = !isSlideMenuHidden
+//    }
     
     
     func createAlert(title: String, message: String, action: String) {

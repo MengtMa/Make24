@@ -75,7 +75,7 @@ class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     
-    @IBAction func cancePressed(_ sender: UIButton) {
+    @IBAction func cancelPressed(_ sender: UIButton) {
         _ = navigationController?.popViewController(animated: true)
     }
     /*

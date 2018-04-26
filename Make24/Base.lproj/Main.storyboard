@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Make24-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Make24" customModuleProvider="target" sceneMemberID="viewController">
@@ -433,7 +433,7 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Make24" id="hjD-iT-seB"/>
+                    <navigationItem key="navigationItem" id="hjD-iT-seB"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="attemptLabel" destination="Exf-yS-MTZ" id="qbg-I3-d5n"/>
@@ -602,7 +602,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="VWD-J9-aEA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="13P-NB-b9f">
+                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="13P-NB-b9f">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -625,7 +625,7 @@
         <image name="icons_key_72" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rZ1-PU-eAd"/>
+        <segue reference="9sz-9I-0Ju"/>
         <segue reference="WRm-j3-bs2"/>
     </inferredMetricsTieBreakers>
 </document>
